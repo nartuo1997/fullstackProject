@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 
 import { selectUser } from './store/userSlice';
 import { useSelector } from 'react-redux';
-
+import { connect } from 'react-redux';
 //import router
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 //import file
 import Navigation from './component/Navigation';
@@ -12,31 +12,17 @@ import Login from './component//Login/Login';
 import Logout from './component/Logout/Logout';
 import Home from './component/HomePage/Home';
 import SignUp from './component/SignUp/SignUp';
-import SongList from './component/SongList';
+import NotFoundPage from './NotFound/NotFoundPage';
+import About from './component/HomePage/About';
+import Resource from './component/Resource/Resource';
+
+
 
 //import action
-import { selectSong } from './action'
+// import { selectSong } from './action'
 
 
-// this.state = {
-//   name: '',
-//   age: ''
-// }
-
-// this.onSubmitChange = (event) => {
-//   this.setState({
-//     name: event.target.value,
-//     age: event.target.age
-//   })
-// }
-
-
-
-function App() {
-
-
-
-
+const App = (props) => {
 
   // const [user, setUser] = useState({
   //   name: "",
@@ -71,22 +57,43 @@ function App() {
   //   })
   // }
 
+  // check tutorial about ProtectedRoute
+  // check for isLoggedIn flag
+  // console.log('App isLoggedIn', props.isLoggedIn);
+
   return (
     <div>
       {/* <SongList></SongList> */}
       <BrowserRouter>
-        <Navigation />
+        <Navigation isLoggedIn={props.isLoggedIn} name={props.userName} />
         {/* <Route path="/" exact component={PageOne}></Route> */}
 
-        <Route path="/" exact component={Home}></Route>
-        <Route path="/signup" exact component={SignUp}></Route>
-        <Route path="/login" >{user ? <Logout /> : <Login />}</Route>
+        {
+          !props.isLoggedIn ?   // if not logged in
+            <Switch>
+              <Route path="/login" exact component={Login}></Route>
+              <Route path="/signup" exact component={SignUp}></Route>
+              <Redirect to='/login' />
+            </Switch>
+            :
+            <Switch>
+              <Redirect path='/login' exact to='/' />
+              <Route path="/" exact component={Home}></Route>
+              <Route path="/about" exact component={About}></Route>
+              <Route path="/resource" exact component={Resource}></Route>
+              <Route path='*' component={NotFoundPage}></Route>
+            </Switch>
+        }
+        {/* <Route path="/login" >{user ? <Logout /> : <Login />}</Route> */}
 
       </BrowserRouter>
 
 
-    </div>
+    </div >
   );
 }
 
-export default App;
+
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn, userName: state.auth.userName })
+)(App);

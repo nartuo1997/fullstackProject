@@ -1,4 +1,6 @@
 import { combineReducers } from "redux";
+import authReducer from '../service/login/authReducer'
+
 
 
 const songReducer = () => {
@@ -11,6 +13,8 @@ const songReducer = () => {
 
 }
 
+
+
 const selectSongReducer = (selectSong = null, action) => {
     if (action.type === "SONG_SELECTED") {
         return action.payload;
@@ -20,7 +24,7 @@ const selectSongReducer = (selectSong = null, action) => {
 }
 
 export default combineReducers({
-    songs: songReducer,
-    selectSong: selectSongReducer
+
+    auth: authReducer // state.auth.userName
 })
 

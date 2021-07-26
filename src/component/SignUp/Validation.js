@@ -1,8 +1,8 @@
 const Validation = (user) => {
     let error = {};
     error.valid = true
-    if (!user.name) {
-        error.name = "Name is required."
+    if (!user.userName) {
+        error.userName = "Name is required."
         error.valid = false
     }
 

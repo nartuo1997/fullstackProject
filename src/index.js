@@ -5,16 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from "react-redux"
-import { createStore } from 'redux';
-import reducer from './reducer'
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
+import reducer from './reducer/index'
 
 // Semantic CSS library
 import 'semantic-ui-css/semantic.min.css'
 
-
+const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(
-  <Provider store={createStore(reducer)}>
+  <Provider store={store}>
     <App />
   </Provider>,
   document.getElementById('root')

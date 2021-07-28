@@ -4,12 +4,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import { Dropdown } from 'semantic-ui-react';
 import { connect } from 'react-redux'
-import { logoutUser } from '../service/login/authAction';
+import { logoutUser } from '../service/loginAPI/authAction';
 import Resource from './Resource/Resource';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import reducer from '../service/login/authReducer';
-import Login from './Login/Login';
+import { useState, useEffect } from 'react';
+
 
 //import CSS library
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,8 +17,11 @@ import Login from './Login/Login';
 const Navigation = (props) => {
     const { dispatch } = props;
 
+
     const logout = () => {
         dispatch(logoutUser());
+        sessionStorage.removeItem('token')
+
     }
 
     return (
@@ -33,26 +34,27 @@ const Navigation = (props) => {
                             <NavLink to="/" className="item">Home</NavLink>
                             <NavLink to="/about" className=" item" >About</NavLink>
 
-
-                            <Dropdown text="Project" className="item">
-
-                                <Dropdown.Menu>
-
-                                    <NavLink to="/resource">
-                                        <Dropdown.Item text="Project1" />
-                                    </NavLink>
-
-                                    <Dropdown.Divider />
-                                    <Dropdown.Item text="Project2" />
-
-
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            <NavLink to="/resource" className=" item" >Resource</NavLink>
 
                             <div className="item right menu">
-                                {console.log("name: ", props.name)}
-                                <Dropdown text={localStorage.getItem("name")}>
+                                <Dropdown text="Project" >
+
+                                    <Dropdown.Menu>
+                                        <NavLink to="/project">
+                                            <Dropdown.Item text="Project1" />
+                                        </NavLink>
+                                        <NavLink to="/project" >
+                                            <Dropdown.Divider />
+                                            <Dropdown.Item text="Project2" />
+                                        </NavLink>
+                                    </Dropdown.Menu>
+
+                                </Dropdown>
+
+                                <i className="user large circle icon"></i>
+                                <Dropdown text={props.userName}>
                                     {/* <img alt="avatar" class="ui circular image"></img> */}
+
                                     <Dropdown.Menu>
 
                                         <Dropdown.Item text="Profile" />
@@ -87,9 +89,10 @@ const Navigation = (props) => {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
+    // console.log(state)
     return {
-        isLoggedIn: state.auth.isLoggedIn
+        isLoggedIn: state.auth.isLoggedIn,
+        userName: state.auth.userName
     }
 }
 
@@ -101,5 +104,5 @@ const mapStateToProps = (state) => {
 
 
 export default connect(
-    // mapStateToProps
+    mapStateToProps
 )(Navigation)

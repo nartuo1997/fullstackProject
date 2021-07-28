@@ -15,6 +15,7 @@ import SignUp from './component/SignUp/SignUp';
 import NotFoundPage from './NotFound/NotFoundPage';
 import About from './component/HomePage/About';
 import Resource from './component/Resource/Resource';
+import Project from './component/Project/Project';
 
 
 
@@ -77,10 +78,11 @@ const App = (props) => {
             </Switch>
             :
             <Switch>
-              <Redirect path='/login' exact to='/' />
+              <Redirect path='/login' exact to='/resource' />
               <Route path="/" exact component={Home}></Route>
               <Route path="/about" exact component={About}></Route>
               <Route path="/resource" exact component={Resource}></Route>
+              <Route path="/project" exact component={Project}></Route>
               <Route path='*' component={NotFoundPage}></Route>
             </Switch>
         }

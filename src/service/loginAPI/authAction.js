@@ -1,4 +1,4 @@
-import { LOGOUT_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE } from "../userTypes";
+import { LOGOUT_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, GET_USER_BY_ID } from "../userTypes";
 import axios from '../../api/axios';
 
 export const authenticateUser = (userName, password) => {
@@ -13,14 +13,13 @@ export const authenticateUser = (userName, password) => {
         axios
             .post("/user/authenticate", credentials)
             .then((response) => {
-
+                console.log(response)
                 let data = response.data;
                 // localStorage.setItem("jwtToken", token);
                 // console.log('response from action', data);
-                dispatch(success(data
+                dispatch(success(data));
 
-                    // isLoggedIn: true
-                ));
+                // isLoggedIn: true
             })
             .catch(() => {
                 dispatch(failure());
@@ -39,6 +38,13 @@ export const logoutUser = () => {
     };
 };
 
+
+
+
+
+
+
+
 const success = (userObject) => {
     return {
         type: LOGIN_SUCCESS,
@@ -53,3 +59,4 @@ const failure = () => {
         // payload: false,
     };
 };
+

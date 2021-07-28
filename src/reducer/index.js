@@ -1,30 +1,10 @@
-import { combineReducers } from "redux";
-import authReducer from '../service/login/authReducer'
+// import { combineReducers } from "redux";
+// import authReducer from '../service/loginAPI/authReducer'
+// import getResourceReducer from '../service/getAPI/getResourceReducer'
 
+// export default combineReducers({
+//     auth: authReducer,  // state.auth.userName
+//     resource: getResourceReducer,   // state.resource.
 
-
-const songReducer = () => {
-    return [
-        { title: "I want it that way", artist: "Back Street Boy" },
-        { title: "Love Story", artist: "Taylor Swift" }
-
-    ]
-
-
-}
-
-
-
-const selectSongReducer = (selectSong = null, action) => {
-    if (action.type === "SONG_SELECTED") {
-        return action.payload;
-    }
-    return selectSong;
-
-}
-
-export default combineReducers({
-
-    auth: authReducer // state.auth.userName
-})
+// })
 

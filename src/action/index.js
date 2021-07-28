@@ -1,3 +1,5 @@
+// this file is not being used
+
 import axios from "../api/axios"
 
 export const login = () => async dispatch => {
@@ -15,3 +17,6 @@ export const signup = () => async dispatch => {
     const response = await axios.post('/register')
     dispatch({ type: 'SIGN_UP', payload: response })
 }
+
+
+

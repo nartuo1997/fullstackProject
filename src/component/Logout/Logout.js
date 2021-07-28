@@ -9,9 +9,11 @@ import './Logout.css'
 const Logout = () => {
     const user = useSelector(selectUser)
     const dispatch = useDispatch();
+
     const onLogout = (e) => {
         e.preventDefault();
         dispatch(logout())
+
     }
 
 

@@ -11,8 +11,6 @@ export const getResource = () => {
         })
             .then((response) => {
                 let resource = response.data;
-                console.log("resource data", resource);
-
                 dispatch(success(resource));
             })
             .catch((e) => {

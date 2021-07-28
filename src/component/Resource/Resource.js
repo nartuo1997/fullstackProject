@@ -86,13 +86,18 @@ const Resource = (props) => {
 
     }, [])
 
+
+    const onClickDelete = (id) => {
+        console.log(id)
+    }
+
     const createCells = () => {
         let temp = props.resource.resource.map(data => {
-            console.log(data.resource_name);
             return (
                 <tr>
-                    <td>{data.resource_name}</td>
-                    <td>{data.code}</td>
+                    <td key={data.resource_id}>{data.resource_name}</td>
+                    <td key={data.resource_id}>{data.code}</td>
+                    <td><i class="trash alternate icon"></i><button onClick={() => onClickDelete(data.resource_id)}>  Delete</button></td>
                 </tr>
 
             )
@@ -100,7 +105,7 @@ const Resource = (props) => {
         return temp;
     };
 
-    // })
+
 
 
 
@@ -114,7 +119,7 @@ const Resource = (props) => {
                 <tr>
                     <th>RESOURCE NAME</th>
                     <th>PROJECT CODE</th>
-
+                    <th></th>
                 </tr>
                 {createCells()}
 

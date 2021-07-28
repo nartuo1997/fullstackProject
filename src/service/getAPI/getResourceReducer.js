@@ -8,8 +8,6 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_RESOURCE_SUCCESS:
-            console.log("Get resource successfully");
-
             return {
                 ...state,
                 resource: action.payload
